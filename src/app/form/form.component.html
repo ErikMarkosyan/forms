@@ -1,0 +1,50 @@
+<div class="button-container">
+<button class="button is-rounded is-primary " type="submit" (click)="addForm()">New Form</button>
+<button class="button is-rounded is-link " type="submit" [disabled]="(password() || arr.invalid )" (click)="onSubmit()">Submit Form</button>
+</div>
+<div class="container">
+  <div class="form" *ngFor="let control of arr.controls | slice : 0 : num; let i = index">
+           <div class="button-container">
+      <button class="del" type="submit" (click)="delete(i)">Delete Form</button>
+               </div>
+    <label class="menu-label"><strong>Form</strong>  {{i +1}}</label>
+    <form class="card-content" [formGroup]="$any(control)" (ngSubmit)="onSubmit()">
+      <div class="columns">
+        <div class="column">
+          <app-input [control]="$any(control).controls['name']" inputType="text" label="Name"></app-input>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <app-input [control]="$any(control).controls['surName']" inputType="text" label="SurName"></app-input>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <app-input [control]="$any(control).controls['phoneNumber']" inputType="text"
+                     label="Phone"></app-input>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <app-input [control]="$any(control).controls['email']" inputType="email" label="@email"></app-input>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <app-input [control]="$any(control).controls['password']" inputType="password" label="Pass"></app-input>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <app-input [control]="$any(control).controls['confirmPassword']" inputType="password"
+                     label="Confirm Pass"></app-input>
+          <div *ngIf="$any(control).controls['confirmPassword'].value && password()">
+            <p class="help is-danger"> Passwords did not match </p>
+          </div>
+        </div>
+      </div>
+          </form>
+
+  </div>
+</div>
